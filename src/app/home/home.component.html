@@ -1,3 +1,91 @@
-<p>
-  home works!
-</p>
+<div id="main-wrapper">
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Bookings</h2>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label for="searchText">Filtrar por BookingID</label>
+                                    <input type="text" placeholder="BookingId" class="form-control" [(ngModel)]="searchText1">
+                                    <div class="demo-radio-button">
+                                            <input name="group1" (change)="getSelected('like',1)" type="radio" id="radio_1" class="with-gap" />
+                                            <label for="radio_1">Incluye</label>
+                                            <input name="group1" (change)="getSelected('>=',1)" type="radio" id="radio_2" class="with-gap" />
+                                            <label for="radio_2">Mayor o igual</label>
+                                            <input name="group1" (change)="getSelected('<=',1)" type="radio" id="radio_3" class="with-gap" />
+                                            <label for="radio_3">Menor o igual</label>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="col-lg-5">
+                                    <div class="form-group">
+                                        <label for="searchText">Filtrar por Precio</label>
+                                        <input type="text" placeholder="BookingId" class="form-control" [(ngModel)]="searchText2">
+                                        <div class="demo-radio-button">
+                                                <input name="group2" (change)="getSelected('like',2)" type="radio" id="radio_4" class="with-gap" />
+                                                <label for="radio_4">Incluye</label>
+                                                <input name="group2" (change)="getSelected('>=',2)" type="radio" id="radio_5" class="with-gap" />
+                                                <label for="radio_5">Mayor o igual</label>
+                                                <input name="group2" (change)="getSelected('<=',2)" type="radio" id="radio_6" class="with-gap" />
+                                                <label for="radio_6">Menor o igual</label>
+                                        </div>
+                                    </div>  
+                                </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                     <tr>
+                                        <th>
+                                            <span class="cursor">BookingId</span>
+                                        </th>
+                                        <th>
+                                            <span class="cursor">Cliente</span>
+                                        </th>
+                                        <th>
+                                            <span class="cursor">Fecha de Creación</span>
+                                        </th>
+                                        <th>
+                                            <span class="cursor">Dirección</span>
+                                        </th>
+                                        <th>
+                                            <span class="cursor">Precio</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr *ngFor="let booking of bookingsSelected | filter : searchText1: filter1: searchText2: filter2;let i = index" title="{{booking.bookingId}}">
+                                        <td>
+                                            <span>{{ booking.bookingId }} </span>
+                                        </td>
+                                        <td>
+                                            <span>{{ booking.tutenUserClient.firstName + " " + booking.tutenUserClient.lastName }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ booking.bookingTime | date }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ booking.locationId.streetAddress }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ booking.bookingPrice }}</span>
+                                        </td>
+                                     </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
