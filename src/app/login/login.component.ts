@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
       private authService: AuthService,
       private alertService: AlertService
   ) {
-      // redirect to home if already logged in
       if (this.authService.currentUserValue) { 
           this.router.navigate(['/']);
       }
@@ -30,18 +29,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.createFormLogin();
-      // get return url from route parameters or default to '/'
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
-      debugger;
       this.submitted = true;
 
-      // stop here if form is invalid
       if (this.loginForm.invalid) {
           return;
       }
@@ -61,7 +56,7 @@ export class LoginComponent implements OnInit {
   createFormLogin(){
     this.loginForm = this.formBuilder.group({
         email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(7)]]
+        password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 }

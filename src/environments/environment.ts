@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_API_URL : 'https://baseapinetcore2.herokuapp.com/api',
+  BASE_API_URL : 'https://dev.tuten.cl:443/TutenREST/rest',
 };
 
 /*

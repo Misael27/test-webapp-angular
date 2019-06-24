@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -25,14 +25,12 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(Email: string, Password: string) {
-    debugger;
-    return this.http.post<any>(environment.BASE_API_URL+"/Auth", { Email, Password })
+  login(email: string, password: string) {
+    let Url =  environment.BASE_API_URL+"/user" + "/" + email;
+
+    return this.http.put<any>(Url,{},{headers:{"app":"APP_BCK",password:password}})
         .pipe(map(user => {
-          debugger;
-            // login successful if there's a jwt token in the response
-            if (user && user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
+            if (user && user.sessionTokenBck) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
             }
